@@ -1,16 +1,39 @@
-import AuthLayout from '../../components/AuthLayout';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
-  return (
-    <AuthLayout>
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-gray-900">Créer un compte</h2>
-        <p className="mt-2 text-sm text-gray-600">
-          Rejoignez la plateforme de gestion de stock ESPRIM
-        </p>
-      </div>
+  const navigate = useNavigate();
 
-      <form className="space-y-6">
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: Implémenter la logique d'inscription
+    navigate('/login');
+  };
+
+  return (
+    <div className="min-h-screen relative">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('/images/esprim-bg.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          filter: "brightness(0.65)"
+        }}
+      />
+      
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md space-y-8 bg-white/95 backdrop-blur-sm p-8 rounded-xl shadow-2xl">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-gray-900">Créer un compte</h2>
+            <p className="mt-2 text-sm text-gray-600">
+              Rejoignez la plateforme de gestion de stock ESPRIM
+            </p>
+          </div>
+
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
             Nom complet
@@ -67,19 +90,21 @@ const Register = () => {
 
         <button
           type="submit"
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           S'inscrire
         </button>
 
-        <div className="text-sm text-center mt-4">
+        <div className="text-sm text-center">
           <span className="text-gray-600">Vous avez déjà un compte ? </span>
-          <a href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+          <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
             Connectez-vous
-          </a>
+          </Link>
         </div>
       </form>
-    </AuthLayout>
+        </div>
+      </div>
+    </div>
   );
 };
 
