@@ -1,53 +1,66 @@
-import { Link } from 'react-router-dom';
+// src/components/Sidebar.jsx
+
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  // Fonction pour gérer la déconnexion
+  const handleLogout = () => {
+    // localStorage.removeItem('authToken'); // Tu activeras ça plus tard
+    navigate('/login');
+  };
+
+  // On utilise les emojis comme tu le souhaites
+  const navItems = [
+    { name: 'Tableau de bord', path: '/dashboard', icon: '📊' },
+    { name: 'Produits', path: '/products', icon: '📦' },
+    { name: 'Catégories', path: '/categories', icon: '🏷️' },
+    { name: 'Mouvements', path: '/mouvements', icon: '🔄' },
+  ];
+
   return (
-    <div className="w-64 h-screen bg-[#1E1E2D] text-gray-400 p-6 fixed left-0 top-0">
-      <div className="mb-10">
-        <h1 className="text-xl font-bold text-white">ESPRIM Stock</h1>
-      </div>
+    // On utilise la couleur de fond que tu préfères
+    <div className="w-64 h-screen bg-gray-800 text-white flex flex-col fixed left-0 top-0">
       
-      <nav className="space-y-6">
-        <Link 
-          to="/dashboard" 
-          className="flex items-center gap-3 p-2 text-blue-400 hover:bg-[#2A2A3C]"
-        >
-          <span className="material-icons">dashboard</span>
-          <span>Tableau de bord</span>
-        </Link>
+      {/* Logo/Header */}
+      <div className="p-4 border-b border-gray-700">
+        <h1 className="text-xl font-bold">ESPRIM Stock</h1>
+      </div>
 
-        <Link 
-          to="/products" 
-          className="flex items-center gap-3 p-2 hover:bg-[#2A2A3C] hover:text-gray-200"
-        >
-          <span className="material-icons">inventory_2</span>
-          <span>Produits</span>
-        </Link>
-
-        <Link 
-          to="/categories" 
-          className="flex items-center gap-3 p-2 hover:bg-[#2A2A3C] hover:text-gray-200"
-        >
-          <span className="material-icons">category</span>
-          <span>Catégories</span>
-        </Link>
-
-        <Link 
-          to="/movements" 
-          className="flex items-center gap-3 p-2 hover:bg-[#2A2A3C] hover:text-gray-200"
-        >
-          <span className="material-icons">swap_horiz</span>
-          <span>Mouvements</span>
-        </Link>
+      {/* Navigation Items */}
+      <nav className="flex-grow p-4">
+        <ul className="space-y-2">
+          {navItems.map((item) => (
+            <li key={item.path}>
+              <NavLink
+                to={item.path}
+                // On garde NavLink pour la fonctionnalité, mais on change le style
+                // pour qu'il corresponde à ton design souhaité
+                className={({ isActive }) =>
+                  `flex items-center p-2 rounded-lg transition-colors ${
+                    isActive
+                      ? 'bg-gray-700 text-white' // Style pour le lien actif
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white' // Style pour les autres liens
+                  }`
+                }
+              >
+                <span className="mr-3 text-xl">{item.icon}</span>
+                {item.name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </nav>
 
-      <div className="absolute bottom-6 w-full left-0 px-6">
-        <button 
-          onClick={() => {/* TODO: Implement logout */}} 
-          className="flex items-center gap-3 p-2 text-red-400 hover:bg-[#2A2A3C] w-full"
+      {/* Logout Button */}
+      <div className="p-4 border-t border-gray-700">
+        <button
+          onClick={handleLogout}
+          className="flex items-center p-2 w-full rounded-lg text-red-400 hover:bg-gray-700 hover:text-red-300 transition-colors text-left"
         >
-          <span className="material-icons">logout</span>
-          <span>Déconnexion</span>
+          <span className="mr-3 text-xl">🚪</span>
+          Déconnexion
         </button>
       </div>
     </div>
