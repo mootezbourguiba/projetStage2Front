@@ -17,6 +17,8 @@ const Sidebar = () => {
     { name: 'Produits', path: '/products', icon: '📦' },
     { name: 'Catégories', path: '/categories', icon: '🏷️' },
     { name: 'Mouvements', path: '/mouvements', icon: '🔄' },
+    { name: 'Fournisseurs', path: '/fournisseurs', icon: '🏬' }, // Ou 'groups', ou 'apartment'
+    { name: 'Emprunts', path: '/emprunts', icon: '⏳' },
   ];
 
   return (
